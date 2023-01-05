@@ -434,7 +434,7 @@ Resources:
       - CodeBuildProjectDownload
     Properties:
       Handle: !Ref CodeBuildWaitHandle
-      Timeout: 600
+      Timeout: 3000
       Count: 1
 
   DeleteDownloadContainerRepo:
