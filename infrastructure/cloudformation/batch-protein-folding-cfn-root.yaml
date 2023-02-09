@@ -126,7 +126,7 @@ Resources:
     Type: "AWS::CloudFormation::Stack"
     Condition: CreateNetwork
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-batch.yamlbatch-protein-folding-cfn-network.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-network.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -137,7 +137,7 @@ Resources:
     Type: "AWS::CloudFormation::Stack"
     Condition: CreateFileSystem
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-fsx-lustre.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-fsx-lustre.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -159,7 +159,7 @@ Resources:
   Container:
     Type: "AWS::CloudFormation::Stack"
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-container.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-container.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -181,7 +181,7 @@ Resources:
   BatchEnvironment:
     Type: "AWS::CloudFormation::Stack"
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-batch.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-batch.yaml
       Parameters:
         CreateG5ComputeEnvironment:
           Ref: CreateG5ComputeEnvironment
@@ -216,7 +216,7 @@ Resources:
     Type: "AWS::CloudFormation::Stack"
     Condition: CreateSageMakerNotebook
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-notebook.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-notebook.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -241,7 +241,7 @@ Resources:
       - BatchEnvironment
     Condition: DownloadFsxDataCondition
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-download.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-download.yaml
       Parameters:
         DownloadJobQueue:
           "Fn::GetAtt": BatchEnvironment.Outputs.GravitonOnDemandJobQueue
@@ -265,7 +265,7 @@ Resources:
   ModuleAlphaFold2:
     Type: "AWS::CloudFormation::Stack"
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-module-alphafold2.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-module-alphafold2.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -283,7 +283,7 @@ Resources:
   ModuleOpenFold:
     Type: "AWS::CloudFormation::Stack"
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-module-openfold.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-module-openfold.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -301,7 +301,7 @@ Resources:
   ModuleJackhmmer:
     Type: "AWS::CloudFormation::Stack"
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-module-jackhmmer.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-module-jackhmmer.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -319,7 +319,7 @@ Resources:
   ModuleOmegaFold:
     Type: "AWS::CloudFormation::Stack"
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-module-omegafold.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-module-omegafold.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -337,7 +337,7 @@ Resources:
   ModuleRFDesignFold:
     Type: "AWS::CloudFormation::Stack"
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-module-rfdesign.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-module-rfdesign.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -355,7 +355,7 @@ Resources:
   ModuleESMFold:
     Type: "AWS::CloudFormation::Stack"
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-module-esmfold.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-module-esmfold.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName
@@ -373,7 +373,7 @@ Resources:
   ModuleProteinMPNN:
     Type: "AWS::CloudFormation::Stack"
     Properties:
-      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/batch-protein-folding-cfn-module-proteinmpnn.yaml
+      TemplateURL: https://snv-cfn-templates.s3.amazonaws.com/aws-batch-arch-for-protein-folding/batch-protein-folding-cfn-module-proteinmpnn.yaml
       Parameters:
         ApplicationName:
           Ref: ApplicationName

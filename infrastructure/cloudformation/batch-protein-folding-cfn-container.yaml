@@ -249,7 +249,8 @@ Resources:
   StartCodeBuildLambda:
     Type: AWS::Lambda::Function
     Properties:
-      ReservedConcurrentExecutions: 25
+#      ReservedConcurrentExecutions: 25
+#      ReservedConcurrentExecutions: 3
       VpcConfig:
         SecurityGroupIds: 
           - !Ref LambdaSecurityGroupId
@@ -323,7 +324,10 @@ Resources:
   DeleteContainerRepoLambda:
     Type: AWS::Lambda::Function
     Properties:
-      ReservedConcurrentExecutions: 25
+#      ReservedConcurrentExecutions: 25
+#      ReservedConcurrentExecutions: 3
+
+
       VpcConfig:
         SecurityGroupIds: 
           - !Ref LambdaSecurityGroupId
@@ -434,7 +438,7 @@ Resources:
       - CodeBuildProjectDownload
     Properties:
       Handle: !Ref CodeBuildWaitHandle
-      Timeout: 3000
+      Timeout: 600
       Count: 1
 
   DeleteDownloadContainerRepo:
