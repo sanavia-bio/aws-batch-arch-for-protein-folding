@@ -338,7 +338,9 @@ Resources:
   DeleteContainerRepoLambda:
     Type: AWS::Lambda::Function
     Properties:
+
       ReservedConcurrentExecutions: 10
+
       VpcConfig:
         SecurityGroupIds: 
           - !Ref LambdaSecurityGroupId

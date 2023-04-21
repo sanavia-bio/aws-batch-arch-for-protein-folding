@@ -70,7 +70,6 @@ Resources:
           boto_session = boto3.session.Session()
           region = boto_session.region_name
           batch = boto_session.client("batch", region_name=region)
-
           def lambda_handler(event, context):
               try:
                   LOGGER.info("REQUEST RECEIVED:\n %s", event)
