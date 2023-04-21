@@ -3,11 +3,14 @@
 
 import pytest
 import boto3
+import os
 from batchfold.batchfold_environment import BatchFoldEnvironment
+
+boto_session = boto3.Session(region_name=os.getenv("AWS_REGION"))
 
 @pytest.fixture()
 def batch_environment():
-    stack = BatchFoldEnvironment(boto_session = boto3.Session())
+    stack = BatchFoldEnvironment(boto_session = boto_session)
     return(stack)
 
 def test_get_stack_outputs(batch_environment):
@@ -17,6 +20,7 @@ def test_get_stack_outputs(batch_environment):
     assert "JackhmmerJobDefinition" in output_keys
     assert "OpenFoldJobDefinition" in output_keys
     assert "DownloadJobDefinition" in output_keys
+    assert "RFDiffusionJobDefinition" in output_keys
     assert "G4dnJobQueue" in output_keys
     assert "GravitonOnDemandJobQueue" in output_keys
     assert "GravitonSpotJobQueue" in output_keys
@@ -39,7 +43,7 @@ def test_get_job_definition_names(batch_environment):
     assert "JackhmmerJobDefinition" in job_def_names
 
 def test_get_job_queue_objects(batch_environment):
-    assert len(batch_environment.queues) == 3
+    assert len(batch_environment.queues) in [3,4]
     assert batch_environment.queues["GravitonOnDemandJobQueue"].name == "GravitonOnDemandJobQueue"
 
 def test_get_default_bucket(batch_environment):

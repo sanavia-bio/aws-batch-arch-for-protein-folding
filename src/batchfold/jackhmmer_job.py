@@ -16,17 +16,16 @@ class JackhmmerJob(BatchFoldJob):
     output_dir: str = uuid.uuid4().hex
     data_dir: str = "/database"
     uniref90_database_path: str = "uniref90/uniref90.fasta"
-    mgnify_database_path: str = "mgnify/mgy_clusters_2018_12.fa"
+    mgnify_database_path: str = "mgnify/mgy_clusters_2022_05.fa"
     template_mmcif_dir: str = "pdb_mmcif/mmcif_files"
     max_template_date: str = datetime.now().strftime("%Y-%m-%d")
     obsolete_pdbs_path: str = "pdb_mmcif/obsolete.dat"
-    job_definition_name: str = "JackhmmerJobDefinition"
     pdb70_database_path: str = "pdb70/pdb70"
     bfd_database_path: str = (
         "bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt"
     )
     small_bfd_database_path: str = "small_bfd/bfd-first_non_consensus_sequences.fasta"
-    uniclust30_database_path: str = "uniclust30/uniclust30_2018_08/uniclust30_2018_08"
+    uniref30_database_path: str = "uniref30/UniRef30_2021_03"
     uniprot_database_path: str = "uniprot/uniprot.fasta"
     pdb_seqres_database_path: str = "pdb_seqres/pdb_seqres.txt"
     db_preset: str = "full_dbs"
@@ -67,7 +66,7 @@ class JackhmmerJob(BatchFoldJob):
             command_list.extend(
                 [
                     f"--bfd_database_path {self.data_dir}/{self.bfd_database_path}",
-                    f"--uniclust30_database_path {self.data_dir}/{self.uniclust30_database_path}",
+                    f"--uniref30_database_path {self.data_dir}/{self.uniref30_database_path}",
                 ]
             )
         else:

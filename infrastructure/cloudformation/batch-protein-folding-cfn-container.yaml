@@ -66,6 +66,8 @@ Resources:
           Value: !Ref ApplicationName
         - Key: StackId
           Value: !Ref AWS::StackId
+        - Key: SolutionId
+          Value: SO9164
 
   DownloadContainerRegistry:
     Type: AWS::ECR::Repository
@@ -78,7 +80,9 @@ Resources:
         - Key: Application
           Value: !Ref ApplicationName
         - Key: StackId
-          Value: !Ref "AWS::StackId"     
+          Value: !Ref "AWS::StackId"    
+        - Key: SolutionId
+          Value: SO9164 
 
   CodeBuildRole:
     Type: AWS::IAM::Role
@@ -157,6 +161,8 @@ Resources:
           Value: !Ref ApplicationName
         - Key: StackId
           Value: !Ref "AWS::StackId"
+        - Key: SolutionId
+          Value: SO9164
 
   EncryptionKey:
     Type: "AWS::KMS::Key"
@@ -220,6 +226,8 @@ Resources:
           Value: !Ref ApplicationName
         - Key: StackId
           Value: !Ref "AWS::StackId"
+        - Key: SolutionId
+          Value: SO9164
 
   CodeBuildLambdaExecutionRole:
     Type: AWS::IAM::Role
@@ -249,8 +257,7 @@ Resources:
   StartCodeBuildLambda:
     Type: AWS::Lambda::Function
     Properties:
-#      ReservedConcurrentExecutions: 25
-#      ReservedConcurrentExecutions: 3
+      ReservedConcurrentExecutions: 10
       VpcConfig:
         SecurityGroupIds: 
           - !Ref LambdaSecurityGroupId
@@ -292,6 +299,13 @@ Resources:
         Fn::GetAtt: CodeBuildLambdaExecutionRole.Arn
       Runtime: python3.8
       Timeout: 10
+      Tags:
+        - Key: Application
+          Value: !Ref ApplicationName
+        - Key: StackId
+          Value: !Ref "AWS::StackId"
+        - Key: SolutionId
+          Value: SO9164      
 
   ##################################################
   # Delete container repo on stack deletion
@@ -324,9 +338,8 @@ Resources:
   DeleteContainerRepoLambda:
     Type: AWS::Lambda::Function
     Properties:
-#      ReservedConcurrentExecutions: 25
-#      ReservedConcurrentExecutions: 3
 
+      ReservedConcurrentExecutions: 10
 
       VpcConfig:
         SecurityGroupIds: 
@@ -376,7 +389,13 @@ Resources:
         Fn::GetAtt: DeleteContainerRepoLambdaExecutionRole.Arn
       Runtime: python3.8
       Timeout: 10     
-
+      Tags:
+        - Key: Application
+          Value: !Ref ApplicationName
+        - Key: StackId
+          Value: !Ref "AWS::StackId"
+        - Key: SolutionId
+          Value: SO9164
 
 ##################################################
 # Create Download Container
@@ -418,7 +437,9 @@ Resources:
         - Key: Application
           Value: !Ref ApplicationName
         - Key: StackId
-          Value: !Ref "AWS::StackId"                
+          Value: !Ref "AWS::StackId"        
+        - Key: SolutionId
+          Value: SO9164                  
 
   StartDownloadContainerBuild:
     Type: Custom::ResourceForBuildingContainer
